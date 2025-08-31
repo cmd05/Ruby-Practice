@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ruby YAML Instruction Preview</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Ruby YAML Instruction Preview</h1>
+    <p style="color:grey">Generated from: add.yaml</p>
+    <table class="fv-table">
+      <thead>
+        <tr><th>Field</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><th class=field>$schema</th><td class=value><span class=scalar>inst_schema.json#</span></td></tr>
+<tr><th class=field>kind</th><td class=value><span class=scalar>instruction</span></td></tr>
+<tr><th class=field>name</th><td class=value><span class=scalar>add</span></td></tr>
+<tr><th class=field>long_name</th><td class=value><span class=scalar>Integer add</span></td></tr>
+<tr><th class=field>description</th><td class=value><span class=scalar>Add the value in xs1 to xs2, and store the result in xd.
+Any overflow is thrown away.
+</span></td></tr>
+<tr><th class=field>definedBy</th><td class=value><span class=scalar>I</span></td></tr>
+<tr><th class=field>assembly</th><td class=value><span class=scalar>xd, xs1, xs2</span></td></tr>
+<tr><th class=field>encoding</th><td class=value><table class=nest-table><tr><th class=nest-field>match</th><td class=nest-value><span class=scalar>0000000----------000-----0110011</span></td></tr><tr><th class=nest-field>variables</th><td class=nest-value><ul class=bullet-list><li><table class=nest-table><tr><th class=nest-field>name</th><td class=nest-value><span class=scalar>xs2</span></td></tr><tr><th class=nest-field>location</th><td class=nest-value><span class=scalar>24-20</span></td></tr></table></li><li><table class=nest-table><tr><th class=nest-field>name</th><td class=nest-value><span class=scalar>xs1</span></td></tr><tr><th class=nest-field>location</th><td class=nest-value><span class=scalar>19-15</span></td></tr></table></li><li><table class=nest-table><tr><th class=nest-field>name</th><td class=nest-value><span class=scalar>xd</span></td></tr><tr><th class=nest-field>location</th><td class=nest-value><span class=scalar>11-7</span></td></tr></table></li></ul></td></tr></table></td></tr>
+<tr><th class=field>access</th><td class=value><table class=nest-table><tr><th class=nest-field>s</th><td class=nest-value><span class=scalar>always</span></td></tr><tr><th class=nest-field>u</th><td class=nest-value><span class=scalar>always</span></td></tr><tr><th class=nest-field>vs</th><td class=nest-value><span class=scalar>always</span></td></tr><tr><th class=nest-field>vu</th><td class=nest-value><span class=scalar>always</span></td></tr></table></td></tr>
+<tr><th class=field>data_independent_timing</th><td class=value><span class=scalar>true</span></td></tr>
+<tr><th class=field>operation()</th><td class=value><span class=scalar>X[xd] = X[xs1] + X[xs2];</span></td></tr>
+<tr><th class=field>sail()</th><td class=value><span class=scalar>{
+  let xs1_val = X(xs1);
+  let xs2_val = X(xs2);
+  let result : xlenbits = match op {
+    RISCV_ADD  =&gt; xs1_val + xs2_val,
+    RISCV_SLT  =&gt; zero_extend(bool_to_bits(xs1_val &lt;_s xs2_val)),
+    RISCV_SLTU =&gt; zero_extend(bool_to_bits(xs1_val &lt;_u xs2_val)),
+    RISCV_AND  =&gt; xs1_val &amp; xs2_val,
+    RISCV_OR   =&gt; xs1_val | xs2_val,
+    RISCV_XOR  =&gt; xs1_val ^ xs2_val,
+    RISCV_SLL  =&gt; if   sizeof(xlen) == 32
+                  then xs1_val &lt;&lt; (xs2_val[4..0])
+                  else xs1_val &lt;&lt; (xs2_val[5..0]),
+    RISCV_SRL  =&gt; if   sizeof(xlen) == 32
+                  then xs1_val &gt;&gt; (xs2_val[4..0])
+                  else xs1_val &gt;&gt; (xs2_val[5..0]),
+    RISCV_SUB  =&gt; xs1_val - xs2_val,
+    RISCV_SRA  =&gt; if   sizeof(xlen) == 32
+                  then shift_right_arith32(xs1_val, xs2_val[4..0])
+                  else shift_right_arith64(xs1_val, xs2_val[5..0])
+  };
+  X(xd) = result;
+  RETIRE_SUCCESS
+}
+</span></td></tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

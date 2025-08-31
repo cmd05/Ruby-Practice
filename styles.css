@@ -1,0 +1,36 @@
+/* File: styles.css
+   If you saved the Ruby script and run it, it will create a reasonable
+   `styles.css` automatically. You can also save this file manually. */
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 24px;
+  background: #f7f9fb;
+  color: #111;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+h1 { font-size: 1.4rem; margin-bottom: 12px; }
+
+.fv-table { width: 100%; border-collapse: collapse; }
+.fv-table thead th { text-align: left; padding: 8px 10px; border-bottom: 2px solid #e6eef6; font-weight: 600; }
+.fv-table tbody td, .fv-table tbody th { vertical-align: top; padding: 10px; border-bottom: 1px solid #eef4fb; }
+.fv-table tbody th.field { width: 25%; color: #0b5cff; font-weight: 600; }
+.fv-table tbody td.value { width: 75%; }
+
+.bullet-list { margin: 6px 0 6px 18px; }
+.scalar { white-space: pre-wrap; }
+
+.nest-table { border-collapse: collapse; margin: 4px 0; width: auto; }
+.nest-table th, .nest-table td { padding: 4px 6px; border: 1px solid #e9f1fb; }
+.nest-field { background: #fbfcff; font-weight: 600; }
+
+.meta { margin-top: 14px; font-size: 0.9rem; color: #666; }
